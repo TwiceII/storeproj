@@ -23,7 +23,7 @@ header {
 
 #logo {
     float: left;
-    width: 180px;
+    width: 260px;
     height: 72px;
 }
 
@@ -39,9 +39,9 @@ header {
 }
 
 header .user-panel {
-    display: inline;
-    float: right;
-    margin-top: 22px;
+  display: inline;
+  float: right;
+  margin-top: 22px;
 }
 
 .ui.menu.top-menu {
@@ -50,10 +50,40 @@ header .user-panel {
 
 
 footer {
+  width: 100%;
+  height: 150px;
+  min-width: 1200px;
+  background: #323232;
+  position: absolute;
+  z-index: -20;
+}
+
+
+/* ============== login page ================= */
+.login {
+  height: 100%;
+}
+
+.login > .ui.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  width: 465px;
+}
+
+.login > .ui.container > .ui.segment {
+  padding: 35px;
+  border-radius: 0px;
+}
+
+.login > .ui.container > .ui.segment > .ui.header > .sub.header {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.dashboard.brand.icon {
     width: 100%;
-    height: 150px;
-    min-width: 1200px;
-    background: #323232;
-    position: absolute;
-    z-index: -20;
+    margin-bottom: 36px;
 }

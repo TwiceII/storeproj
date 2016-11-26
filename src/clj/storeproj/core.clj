@@ -28,6 +28,8 @@
 
 (def bidi-routes
   ["" [["/" (html-template-resource ::index "resources/public/templates/index.html")]
+       ["/login" (html-template-resource ::login "resources/public/templates/login.html")]
+       ["/sales" (html-template-resource ::sales "resources/public/templates/sales.html")]
        ["" (yada/yada (new-classpath-resource "public"))]
    ]])
 
