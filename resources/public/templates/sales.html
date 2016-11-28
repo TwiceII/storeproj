@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Продажи</title>
-    <link href="css/semantic.min.css" rel="stylesheet">
-    <link href="css/admin.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-    <script src="js/jquery-1.11.3.min.js"></script>
+    <link href="/css/semantic.min.css" rel="stylesheet">
+    <link href="/css/admin.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <script src="/js/jquery-1.11.3.min.js"></script>
   </head>
   <body>
     <div class="page">
@@ -47,6 +47,15 @@
         </div>
       </div>
       <div class="ui container">
+        <!-- путь -->
+        <div class="ui basic segment">
+          <div class="ui breadcrumb">
+            <a class="section">Все операции</a>
+            <i class="right chevron icon divider"></i>
+            <div class="section">Продажи и возвраты</div>
+          </div>
+        </div>
+
         <!-- меню -->
         <div class="ui compact small menu">
           <a class="item active">
@@ -81,7 +90,25 @@
                   </div>
                   <div class="field">
                     <label>Клиент</label>
-                    <input type="text" name="" placeholder="Выбрать">
+                    <div class="ui fluid search selection dropdown">
+                      <input type="hidden" name="client-id">
+                      <i class="dropdown icon"></i>
+                      <div class="default text">Выберите клиента</div>
+                      <div class="menu">
+                        <div class="item" data-value="1">
+                          Канатулы Канат
+                        </div>
+                        <div class="item" data-value="2">
+                          Иванов Иван
+                        </div>
+                        <div class="item" data-value="3">
+                          Еще кто-то
+                        </div>
+                        <div class="item" data-value="4">
+                          Четвертый клиент
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div class="inline field">
                     <div class="ui checkbox">
@@ -234,11 +261,14 @@
       </div>
     </footer>
     <!-- footer javascripts -->
-    <script src="js/semantic.min.js"></script>
+    <script src="/js/semantic.min.js"></script>
     <script>
       $(function () {
         console.log("start page");
         $('.ui.dropdown').dropdown();
+        $('.ui.search.dropdown').dropdown({
+          fullTextSearch: "exact"
+        });
       });
     </script>
   </body>

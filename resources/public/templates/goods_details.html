@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Описание товара</title>
+    <link href="/css/semantic.min.css" rel="stylesheet">
+    <link href="/css/admin.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <script src="/js/jquery-1.11.3.min.js"></script>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="ui container">
+          <div id="logo">
+            <h1 class="ui blue header">
+              BRK Ummastore
+            </h1>
+          </div>
+          <div class="user-panel">
+            <div class="ui inline labeled icon top right pointing dropdown">
+              <img class="ui avatar user-ava image" src="/images/user_avatars/user1.jpg"> Администратор
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <a class="item" href=""><i class="setting icon"></i>Настройки профиля</a>
+                <a class="item" href=""><i class="sign out icon"></i>Выйти</a>
+              </div>
+            </div>
+          </div>
+          <div id="main-search-input">
+            <div class="ui icon input">
+              <input type="text" placeholder="Поиск...">
+              <i class="search link icon"></i>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="ui blue inverted menu top-menu">
+        <div class="ui container">
+          <div class="left menu">
+            <a class="item" href="#"><i class="home icon"></i>Главная</a>
+            <a class="active item" href="/sales"><i class="shop icon"></i>Продажи</a>
+            <a class="item" href="#"><i class="archive icon"></i>Товары</a>
+            <a class="item" href="#"><i class="money icon"></i>Деньги</a>
+            <a class="item" href="#"><i class="settings icon"></i>Настройки</a>
+          </div>
+        </div>
+      </div>
+      <div class="ui container">
+        <!-- путь -->
+        <div class="ui basic segment">
+          <div class="ui breadcrumb">
+            <a class="section">Справочники</a>
+            <i class="right chevron icon divider"></i>
+            <a class="section">Товары</a>
+            <i class="right chevron icon divider"></i>
+            <div class="active section">12 принципов лидерского превосходства, Б. Трейси. Попурри</div>
+          </div>
+        </div>
+
+        <!-- основная панель -->
+        <div class="ui segments">
+          <div class="ui clearing segment header-segment">
+            <div class="ui small left floated header">
+              Описание товара
+            </div>
+            <div class="ui mini right floated labeled icon button">
+              <i class="write icon"></i>
+              Редактировать
+            </div>
+          </div>
+          <div class="ui segment">
+            <div class="ui grid">
+              <div class="row">
+                <div class="three wide column">
+                  <img class="ui fluid image" src="/images/goods/good_default.png">
+                </div>
+                <div class="thirteen wide column">
+                  <!-- название и категория -->
+                  <div class="ui large header">
+                    12 принципов лидерского превосходства, Б. Трейси. Попурри
+                    <div class="sub header">Деловая литература</div>
+                  </div>
+                  <!-- тэги -->
+                  <div class="ui tag labels">
+                    <a class="ui label">Трейси</a>
+                    <a class="ui label">Бестселлер</a>
+                  </div>
+                  <!-- описание -->
+                  <div class="ui segment">
+                    <p>
+                      Какое-то описание продукта
+                    </p>
+                  </div>
+                  <!-- остальные поля -->
+                  <div class="ui form">
+                    <div class="inline field">
+                      <label>Цена:</label>
+                      1500 тг
+                    </div>
+                    <div class="inline field">
+                      <label>Последняя себестоимость:</label>
+                      699 тг
+                    </div>
+                    <div class="inline field">
+                      <label>Код:</label>
+                      978-985-15-2040-2
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- остатки и продажи -->
+              <div class="row">
+                <div class="five wide column">
+                  <div class="ui small dividing header">
+                    Наличие товара
+                  </div>
+                  <table class="ui very compact celled table bold-footer">
+                    <thead>
+                      <tr>
+                        <th>Склад</th>
+                        <th>Остаток</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Магазин Алматы</td>
+                        <td>3</td>
+                      </tr>
+                      <tr>
+                        <td>Магазин Астана</td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <td>Контейнер</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>Склад</td>
+                        <td>5</td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Всего</th>
+                        <th>18</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div class="eleven wide column">
+                  <div class="ui small dividing header">
+                    Последние продажи
+                  </div>
+                  <table class="ui very compact celled table">
+                    <thead>
+                      <tr>
+                        <th>Дата и время</th>
+                        <th>Магазин</th>
+                        <th>Продавец</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Клиент</th>
+                        <th>Общая сумма</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Сегодня, 12:20</td>
+                        <td><a href="#">Магазин Алматы</a></td>
+                        <td><a href="#">Искакова Айжан</a></td>
+                        <td>1500</td>
+                        <td>2</td>
+                        <td><a href="#">Канатулы Канат</a></td>
+                        <td>3000</td>
+                      </tr>
+                      <tr>
+                        <td>25 нояб, 15:40</td>
+                        <td><a href="#">Алматы молл</a></td>
+                        <td><a href="#">Жанерке Кайруллина</a></td>
+                        <td>1300</td>
+                        <td>1</td>
+                        <td><a href="#">Иванов Иван</a></td>
+                        <td>1300</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <footer>
+      <div id="copyrights">
+        <div class="inset">
+          <div class="bigcontainer">
+            <div class="fl">
+              <div class="logo"></div>
+              <p>© 2016 BRK<br></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer javascripts -->
+    <script src="/js/semantic.min.js"></script>
+    <script>
+      $(function () {
+        console.log("start page");
+        $('.ui.dropdown').dropdown();
+        $('.ui.search.dropdown').dropdown({
+          fullTextSearch: "exact"
+        });
+      });
+    </script>
+  </body>
+</html>

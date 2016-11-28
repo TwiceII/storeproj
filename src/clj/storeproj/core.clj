@@ -30,6 +30,8 @@
   ["" [["/" (html-template-resource ::index "resources/public/templates/index.html")]
        ["/login" (html-template-resource ::login "resources/public/templates/login.html")]
        ["/sales" (html-template-resource ::sales "resources/public/templates/sales.html")]
+       ["/goods/details" (html-template-resource ::goods-details "resources/public/templates/goods_details.html")]
+       ["/goods/all" (html-template-resource ::goods-all "resources/public/templates/goods_search.html")]
        ["" (yada/yada (new-classpath-resource "public"))]
    ]])
 

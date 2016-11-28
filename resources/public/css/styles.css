@@ -93,3 +93,21 @@ footer {
   margin-top: 30px;
 
 }
+
+/* ============= detail page =============== */
+.ui.clearing.segment.header-segment {
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+
+.ui.clearing.segment.header-segment > .ui.floated.header {
+  margin-bottom: 0px;
+  padding-top: 5px;
+}
+
+table.ui.celled.table.bold-footer > tfoot > tr > th {
+   font-weight: 700;
+}
+
+/* ============ search page ========== */
+
