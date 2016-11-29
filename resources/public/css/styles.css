@@ -110,4 +110,15 @@ table.ui.celled.table.bold-footer > tfoot > tr > th {
 }
 
 /* ============ search page ========== */
+.ui.header > span.text-span {
+  font-weight: normal;
+}
 
+.ui.header > span.number-span {
+
+}
+
+
+.ui.dropdown.middle-aligned {
+  vertical-align: middle;
+}

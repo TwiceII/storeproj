@@ -65,9 +65,60 @@
         </div>
         <div class="ui bottom attached segment">
           <form class="ui form">
-            <div class="inline ten wide field">
+            <div class="inline field">
               <label>Поиск по строке:</label>
               <input type="text">
+            </div>
+            <div class="inline field">
+              <label>Поиск по тегам:</label>
+              <div class="ui multiple search selection dropdown middle-aligned">
+                <input name="tags" type="hidden">
+                <i class="dropdown icon"></i>
+                <div class="default text">Тэги</div>
+                <div class="menu">
+                  <div class="item" data-value="angular">Трейси</div>
+                  <div class="item" data-value="css">Бестселлер</div>
+                  <div class="item" data-value="design">Бизнес</div>
+                  <div class="item" data-value="ember">Школа</div>
+                  <div class="item" data-value="html">Шамиль</div>
+                  <div class="item" data-value="ia">Ислам</div>
+                  <div class="item" data-value="javascript">Менеджмент</div>
+                  <div class="item" data-value="mech">Для женщин</div>
+                  <div class="item" data-value="meteor">Для детей</div>
+                  <div class="item" data-value="node">Энциклопедия</div>
+                  <div class="item" data-value="plumbing">Эксмо</div>
+                  <div class="item" data-value="python">МИФ книга</div>
+                  <div class="item" data-value="rails">Супер-цена</div>
+                </div>
+              </div>
+            </div>
+            <div class="inline field">
+              <label>Категории:</label>
+              <div class="ui multiple dropdown">
+                <input type="hidden" name="categories">
+                <i class="filter icon"></i>
+                <span class="text">Все </span>
+                <div class="menu">
+                  <div class="ui icon search input">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="Поиск по названию...">
+                  </div>
+                  <div class="scrolling menu">
+                    <div class="item" data-value="1">
+                      Религиозная литература
+                    </div>
+                    <div class="item" data-value="2">
+                      Деловая литература
+                    </div>
+                    <div class="item" data-value="3">
+                      Детская литература
+                    </div>
+                    <div class="item" data-value="4">
+                      Прочее
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="inline field">
               <label>Учитывать склады:</label>
@@ -101,7 +152,9 @@
               </div>
             </div>
 
+
             <div class="ui primary button">
+              <i class="search icon"></i>
               Поиск
             </div>
           </form>
@@ -110,11 +163,19 @@
         <!-- результаты таблицы -->
         <div class="ui segment">
           <div class="ui dividing header">
-            Результаты поиска
+            Результаты поиска -
+            <span class="text-span">найдено: </span>
+            <span class="number-span">300</span>,
+            <span class="text-span">показаны: </span>
+            <span class="number-span">1-20</span>
           </div>
-          <div class="ui primary labeled icon button">
+          <div class="ui primary small labeled icon button">
             <i class="add icon"></i>
-            Добавить
+            Добавить товар
+          </div>
+          <div class="ui red basic small button">
+            <i class="remove icon"></i>
+            Удалить отмеченные
           </div>
           <div class="ui right floated pagination small menu">
             <a class="icon item">
@@ -154,7 +215,7 @@
                   </div>
                 </td>
                 <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
+                <td><a href="#">12 правил успешного бизнеса и т.д.</a></td>
                 <td>934-4324-1232-3</td>
                 <td>Деловая литература</td>
                 <td>2000</td>
@@ -192,6 +253,11 @@
                     </div>
                   </div>
                 </td>
+<!--                 <td>
+                  <div class="ui icon mini primary button">
+                    <i class="edit icon"></i>
+                  </div>
+                </td> -->
               </tr>
               <tr class="positive">
                 <td>
