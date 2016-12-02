@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [bidi "2.0.14"]
                  [aleph "0.4.1"]
+                 [selmer "1.10.1"]
                  [buddy/buddy-sign "1.3.0"]
                  [yada "1.1.41"]]
   :source-paths ["src/clj" "src/cljs" "dev"]

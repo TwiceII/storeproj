@@ -1,665 +1,658 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Поиск по продажам</title>
-    <link href="/css/semantic.min.css" rel="stylesheet">
-    <link href="/css/admin.css" rel="stylesheet">
-    <link href="/css/styles.css" rel="stylesheet">
-    <script src="/js/jquery-1.11.3.min.js"></script>
-  </head>
-  <body>
-    <div class="page">
-      <header>
-        <div class="ui container">
-          <div id="logo">
-            <h1 class="ui blue header">
-              BRK Ummastore
-            </h1>
-          </div>
-          <div class="user-panel">
-            <div class="ui inline labeled icon top right pointing dropdown">
-              <img class="ui avatar user-ava image" src="/images/user_avatars/user1.jpg"> Администратор
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                <a class="item" href=""><i class="setting icon"></i>Настройки профиля</a>
-                <a class="item" href=""><i class="sign out icon"></i>Выйти</a>
-              </div>
-            </div>
-          </div>
-          <div id="main-search-input">
-            <div class="ui icon input">
-              <input type="text" placeholder="Поиск...">
-              <i class="search link icon"></i>
-            </div>
-          </div>
-        </div>
-      </header>
-      <div class="ui blue inverted menu top-menu">
-        <div class="ui container">
-          <div class="left menu">
-            <a class="item" href="#"><i class="home icon"></i>Главная</a>
-            <a class="active item" href="/sales"><i class="shop icon"></i>Продажи</a>
-            <a class="item" href="#"><i class="archive icon"></i>Товары</a>
-            <a class="item" href="#"><i class="money icon"></i>Деньги</a>
-            <a class="item" href="#"><i class="settings icon"></i>Настройки</a>
-          </div>
-        </div>
-      </div>
-      <div class="ui container">
-        <!-- путь -->
-        <div class="ui basic segment">
-          <div class="ui breadcrumb">
-            <a class="section">Справочники</a>
-            <i class="right chevron icon divider"></i>
-            <div class="active section">Товары</div>
-          </div>
-        </div>
+{% extends "public/templates/__base.html" %}
 
-        <!-- фильтры -->
-        <div class="ui top attached clearing segment header-segment">
-          <div class="ui small left floated header">Фильтры</div>
-          <div class="ui mini right floated icon button">
-            <i class="chevron up icon"></i>
-          </div>
-        </div>
-        <div class="ui bottom attached segment">
-          <form class="ui form">
-            <div class="inline field">
-              <label>Поиск по строке:</label>
-              <input type="text">
-            </div>
-            <div class="inline field">
-              <label>Магазины:</label>
-              <div class="ui multiple dropdown">
-                <input type="hidden" name="categories">
-                <i class="filter icon"></i>
-                <span class="text">Все </span>
-                <div class="menu">
-                  <div class="ui icon search input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="Поиск по названию...">
-                  </div>
-                  <div class="scrolling menu">
-                    <div class="item" data-value="1">
-                      Магазин Алматы
-                    </div>
-                    <div class="item" data-value="2">
-                      Магазин Астана
-                    </div>
-                    <div class="item" data-value="3">
-                      Магазин 3
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="inline field">
-              <label>Счета:</label>
-              <div class="ui multiple dropdown">
-                <input type="hidden" name="categories">
-                <i class="filter icon"></i>
-                <span class="text">Все </span>
-                <div class="menu">
-                  <div class="ui icon search input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="Поиск по названию...">
-                  </div>
-                  <div class="scrolling menu">
-                    <div class="item" data-value="1">
-                      Касса Алматы
-                    </div>
-                    <div class="item" data-value="2">
-                      Касса Астана
-                    </div>
-                    <div class="item" data-value="3">
-                      Банковский счет Kaspi
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="inline field">
-              <label>Продавцы:</label>
-              <div class="ui multiple dropdown">
-                <input type="hidden" name="categories">
-                <i class="filter icon"></i>
-                <span class="text">Все </span>
-                <div class="menu">
-                  <div class="ui icon search input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="Поиск...">
-                  </div>
-                  <div class="scrolling menu">
-                    <div class="item" data-value="1">
-                      Искакова Айжан
-                    </div>
-                    <div class="item" data-value="2">
-                      Исмаил Лома
-                    </div>
-                    <div class="item" data-value="3">
-                      Несипбек Жасан
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="inline field">
-              <label>Клиенты:</label>
-              <div class="ui multiple dropdown">
-                <input type="hidden" name="categories">
-                <i class="filter icon"></i>
-                <span class="text">Все </span>
-                <div class="menu">
-                  <div class="ui icon search input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="Поиск...">
-                  </div>
-                  <div class="scrolling menu">
-                    <div class="item" data-value="1">
-                      Иванов Иван
-                    </div>
-                    <div class="item" data-value="2">
-                      Канатулы Канат
-                    </div>
-                    <div class="item" data-value="3">
-                      Еще какой-то клиент
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+{% block content %}
+<!-- путь -->
+<div class="ui basic segment">
+  <div class="ui breadcrumb">
+    <a class="section">Справочники</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Товары</div>
+  </div>
+</div>
 
-
-            <div class="ui primary button">
-              <i class="search icon"></i>
-              Поиск
-            </div>
-            <div class="ui button" id="modal_open_btn">
-              Модальное окно
-            </div>
-          </form>
-        </div>
-
-        <!-- результаты таблицы -->
-        <div class="ui segment">
-          <div class="ui dividing header">
-            Результаты поиска -
-            <span class="text-span">найдено: </span>
-            <span class="number-span">50000</span>,
-            <span class="text-span">показаны: </span>
-            <span class="number-span">1-20</span>
-          </div>
-          <div class="ui red basic small button">
-            <i class="remove icon"></i>
-            Удалить отмеченные
-          </div>
-          <div class="ui right floated pagination small menu">
-            <a class="icon item">
-              <i class="left chevron icon"></i>
-            </a>
-            <a class="item">1</a>
-            <a class="item">2</a>
-            <a class="item">3</a>
-            <a class="item">4</a>
-            <a class="item">...</a>
-            <a class="item">356</a>
-            <a class="icon item">
-              <i class="right chevron icon"></i>
-            </a>
-          </div>
-
-          <table class="ui compact celled selectable table">
-            <thead>
-              <tr>
-                <th>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-                  </div>
-                </th>
-                <th>Дата продажи</th>
-                <th>Магазин</th>
-                <th>Счет</th>
-                <th>Склад</th>
-                <th>Продавец</th>
-                <th>Клиент</th>
-                <th>Товар</th>
-                <th>Кол-во</th>
-                <th>Цена</th>
-                <th>Скидка</th>
-                <th>Сумма</th>
-                <th>Дата оплаты</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr class="positive">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>23.11.16</td>
-                <td>Магазин Астаны</td>
-                <td>Касса Астаны</td>
-                <td>Склад Астаны</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Канатулы Канат</a></td>
-                <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
-                <td>2</td>
-                <td>2000</td>
-                <td></td>
-                <td>4000</td>
-                <td>27.11.16</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr class="warning">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>23.11.16</td>
-                <td>Магазин Астаны</td>
-                <td>Касса Астаны</td>
-                <td>Склад Астаны</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Канатулы Канат</a></td>
-                <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
-                <td>2</td>
-                <td>2000</td>
-                <td></td>
-                <td>4000</td>
-                <td></td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr class="positive">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>23.11.16</td>
-                <td>Магазин Астаны</td>
-                <td>Касса Астаны</td>
-                <td>Склад Астаны</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Канатулы Канат</a></td>
-                <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
-                <td>2</td>
-                <td>2000</td>
-                <td></td>
-                <td>4000</td>
-                <td>27.11.16</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr class="warning">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>23.11.16</td>
-                <td>Магазин Астаны</td>
-                <td>Касса Астаны</td>
-                <td>Склад Астаны</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Канатулы Канат</a></td>
-                <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
-                <td>2</td>
-                <td>2000</td>
-                <td></td>
-                <td>4000</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr class="positive">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>23.11.16</td>
-                <td>Магазин Астаны</td>
-                <td>Касса Астаны</td>
-                <td>Склад Астаны</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Канатулы Канат</a></td>
-                <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
-                <td>2</td>
-                <td>2000</td>
-                <td></td>
-                <td>4000</td>
-                <td>27.11.16</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr class="warning">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>23.11.16</td>
-                <td>Магазин Астаны</td>
-                <td>Касса Астаны</td>
-                <td>Склад Астаны</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Канатулы Канат</a></td>
-                <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
-                <td>2</td>
-                <td>2000</td>
-                <td></td>
-                <td>4000</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr class="positive">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>23.11.16</td>
-                <td>Магазин Астаны</td>
-                <td>Касса Астаны</td>
-                <td>Склад Астаны</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Канатулы Канат</a></td>
-                <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
-                <td>2</td>
-                <td>2000</td>
-                <td></td>
-                <td>4000</td>
-                <td>27.11.16</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>24.11.16</td>
-                <td>Магазин Алматы</td>
-                <td>Касса Алматы</td>
-                <td>Склад магазина Алматы</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Иванов Иван</a></td>
-                <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
-                <td>1</td>
-                <td>1200</td>
-                <td>200</td>
-                <td>1000</td>
-                <td></td>
-              </tr>
-              <tr class="warning">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td>23.11.16</td>
-                <td>Магазин Астаны</td>
-                <td>Касса Астаны</td>
-                <td>Склад Астаны</td>
-                <td><a href="#">Искакова Айжан</a></td>
-                <td><a href="#">Канатулы Канат</a></td>
-                <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
-                <td>2</td>
-                <td>2000</td>
-                <td></td>
-                <td>4000</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-
-      </div>
+<!-- фильтры -->
+<div class="ui top attached clearing segment header-segment">
+  <div class="ui small left floated header">Фильтры</div>
+  <div class="ui mini right floated icon button">
+    <i class="chevron up icon"></i>
+  </div>
+</div>
+<div class="ui bottom attached segment">
+  <form class="ui form">
+    <div class="inline field">
+      <label>Поиск по строке:</label>
+      <input type="text">
     </div>
-
-    <footer>
-      <div id="copyrights">
-        <div class="inset">
-          <div class="bigcontainer">
-            <div class="fl">
-              <div class="logo"></div>
-              <p>© 2016 BRK<br></p>
+    <div class="inline field">
+      <label>Магазины:</label>
+      <div class="ui multiple dropdown">
+        <input type="hidden" name="categories">
+        <i class="filter icon"></i>
+        <span class="text">Все </span>
+        <div class="menu">
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="Поиск по названию...">
+          </div>
+          <div class="scrolling menu">
+            <div class="item" data-value="1">
+              Магазин Алматы
+            </div>
+            <div class="item" data-value="2">
+              Магазин Астана
+            </div>
+            <div class="item" data-value="3">
+              Магазин 3
             </div>
           </div>
-        </div>
-      </div>
-    </footer>
-
-    <div class="ui modal" id="sale_modal">
-      <div class="content">
-        <form class="ui form">
-          <div class="field">
-            <label>Дата: </label>24 ноября 2016 г., 11:34
-          </div>
-          <div class="three fields">
-            <div class="field">
-              <label>Магазин: </label>Магазин Алматы
-            </div>
-            <div class="field">
-              <label>Касса: </label>Касса "Магазин Алматы"
-            </div>
-            <div class="field">
-              <label>Склад: </label>Склад "Магазин Алматы"
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="actions">
-        <div class="ui approve button">
-          <i class="edit icon"></i>
-          Редактировать
         </div>
       </div>
     </div>
+    <div class="inline field">
+      <label>Счета:</label>
+      <div class="ui multiple dropdown">
+        <input type="hidden" name="categories">
+        <i class="filter icon"></i>
+        <span class="text">Все </span>
+        <div class="menu">
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="Поиск по названию...">
+          </div>
+          <div class="scrolling menu">
+            <div class="item" data-value="1">
+              Касса Алматы
+            </div>
+            <div class="item" data-value="2">
+              Касса Астана
+            </div>
+            <div class="item" data-value="3">
+              Банковский счет Kaspi
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="inline field">
+      <label>Продавцы:</label>
+      <div class="ui multiple dropdown">
+        <input type="hidden" name="categories">
+        <i class="filter icon"></i>
+        <span class="text">Все </span>
+        <div class="menu">
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="Поиск...">
+          </div>
+          <div class="scrolling menu">
+            <div class="item" data-value="1">
+              Искакова Айжан
+            </div>
+            <div class="item" data-value="2">
+              Исмаил Лома
+            </div>
+            <div class="item" data-value="3">
+              Несипбек Жасан
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="inline field">
+      <label>Клиенты:</label>
+      <div class="ui multiple dropdown">
+        <input type="hidden" name="categories">
+        <i class="filter icon"></i>
+        <span class="text">Все </span>
+        <div class="menu">
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="Поиск...">
+          </div>
+          <div class="scrolling menu">
+            <div class="item" data-value="1">
+              Иванов Иван
+            </div>
+            <div class="item" data-value="2">
+              Канатулы Канат
+            </div>
+            <div class="item" data-value="3">
+              Еще какой-то клиент
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="ui primary button">
+      <i class="search icon"></i>
+      Поиск
+    </div>
+  </form>
+</div>
+
+<!-- результаты таблицы -->
+<div class="ui segment">
+  <div class="ui dividing header">
+    Результаты поиска -
+    <span class="text-span">найдено: </span>
+    <span class="number-span">50000</span>,
+    <span class="text-span">показаны: </span>
+    <span class="number-span">1-20</span>
+  </div>
+  <div class="ui red basic small button">
+    <i class="remove icon"></i>
+    Удалить отмеченные
+  </div>
+  <div class="ui right floated pagination small menu">
+    <a class="icon item">
+      <i class="left chevron icon"></i>
+    </a>
+    <a class="item">1</a>
+    <a class="item">2</a>
+    <a class="item">3</a>
+    <a class="item">4</a>
+    <a class="item">...</a>
+    <a class="item">356</a>
+    <a class="icon item">
+      <i class="right chevron icon"></i>
+    </a>
+  </div>
+
+  <table class="ui compact celled selectable table">
+    <thead>
+      <tr>
+        <th>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example">
+          </div>
+        </th>
+        <th>Дата продажи</th>
+        <th>Магазин</th>
+        <th>Счет</th>
+        <th>Склад</th>
+        <th>Продавец</th>
+        <th>Клиент</th>
+        <th>Товар</th>
+        <th>Кол-во</th>
+        <th>Цена</th>
+        <th>Скидка</th>
+        <th>Сумма</th>
+        <th>Дата оплаты</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr onclick="openModal();">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr class="positive">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>23.11.16</td>
+        <td>Магазин Астаны</td>
+        <td>Касса Астаны</td>
+        <td>Склад Астаны</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Канатулы Канат</a></td>
+        <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
+        <td>2</td>
+        <td>2000</td>
+        <td></td>
+        <td>4000</td>
+        <td>27.11.16</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr class="warning">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>23.11.16</td>
+        <td>Магазин Астаны</td>
+        <td>Касса Астаны</td>
+        <td>Склад Астаны</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Канатулы Канат</a></td>
+        <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
+        <td>2</td>
+        <td>2000</td>
+        <td></td>
+        <td>4000</td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr class="positive">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>23.11.16</td>
+        <td>Магазин Астаны</td>
+        <td>Касса Астаны</td>
+        <td>Склад Астаны</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Канатулы Канат</a></td>
+        <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
+        <td>2</td>
+        <td>2000</td>
+        <td></td>
+        <td>4000</td>
+        <td>27.11.16</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr class="warning">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>23.11.16</td>
+        <td>Магазин Астаны</td>
+        <td>Касса Астаны</td>
+        <td>Склад Астаны</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Канатулы Канат</a></td>
+        <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
+        <td>2</td>
+        <td>2000</td>
+        <td></td>
+        <td>4000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr class="positive">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>23.11.16</td>
+        <td>Магазин Астаны</td>
+        <td>Касса Астаны</td>
+        <td>Склад Астаны</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Канатулы Канат</a></td>
+        <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
+        <td>2</td>
+        <td>2000</td>
+        <td></td>
+        <td>4000</td>
+        <td>27.11.16</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr class="warning">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>23.11.16</td>
+        <td>Магазин Астаны</td>
+        <td>Касса Астаны</td>
+        <td>Склад Астаны</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Канатулы Канат</a></td>
+        <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
+        <td>2</td>
+        <td>2000</td>
+        <td></td>
+        <td>4000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr class="positive">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>23.11.16</td>
+        <td>Магазин Астаны</td>
+        <td>Касса Астаны</td>
+        <td>Склад Астаны</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Канатулы Канат</a></td>
+        <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
+        <td>2</td>
+        <td>2000</td>
+        <td></td>
+        <td>4000</td>
+        <td>27.11.16</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>24.11.16</td>
+        <td>Магазин Алматы</td>
+        <td>Касса Алматы</td>
+        <td>Склад магазина Алматы</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Иванов Иван</a></td>
+        <td><a href="#">Стань самым умным, самым богатым! Ш. Аляутдинов</a></td>
+        <td>1</td>
+        <td>1200</td>
+        <td>200</td>
+        <td>1000</td>
+        <td></td>
+      </tr>
+      <tr class="warning">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td>23.11.16</td>
+        <td>Магазин Астаны</td>
+        <td>Касса Астаны</td>
+        <td>Склад Астаны</td>
+        <td><a href="#">Искакова Айжан</a></td>
+        <td><a href="#">Канатулы Канат</a></td>
+        <td><a href="#">Стань еще умнее и еще богаче! Ш. Аляутдинов</a></td>
+        <td>2</td>
+        <td>2000</td>
+        <td></td>
+        <td>4000</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="ui small modal" id="sale_modal">
+  <div class="content">
+    <form class="ui form">
+      <div class="two fields">
+        <div class="field">
+          <label>Дата продажи: </label>
+          <input type="text" readonly="" value="24 ноября 2016 г., 11:34">
+        </div>
+        <div class="field">
+          <label>Дата получения оплаты: </label>
+          <input type="text" readonly="" value="30 ноября 2016 г., 13:22">
+        </div>
+      </div>
+      <div class="field">
+        <label>Комментарий: </label>
+        <textarea rows="2">Какой-то длинный комментарий с номером заказа или еще чем</textarea>
+      </div>
+      <div class="three fields">
+        <div class="field">
+          <label>Магазин: </label>
+          <input type="text" readonly="" value="Магазин Алматы">
+        </div>
+        <div class="field">
+          <label>Касса: </label>
+          <input type="text" readonly="" value="Касса 'Магазин Алматы'">
+        </div>
+        <div class="field">
+          <label>Склад: </label>
+          <input type="text" readonly="" value="Склад 'Магазин Алматы'">
+        </div>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <label>Продавец: </label>
+          <input type="text" readonly="" value="Искакова Айжан">
+        </div>
+        <div class="field">
+          <label>Клиент: </label>
+          <input type="text" readonly="" value="Иванов Иван">
+        </div>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <label>Товар: </label>
+          <input type="text" readonly="" value="Думай и богатей! 12 правил бла бла">
+        </div>
+        <div class="field">
+          <label>Кол-во: </label>
+          <input type="text" readonly="" value="1">
+        </div>
+      </div>
+      <div class="four fields">
+        <div class="field">
+          <label>Цена: </label>
+          <input type="text" readonly="" value="1500 тг">
+        </div>
+        <div class="field">
+          <label>Себестоимость: </label>
+          <input type="text" readonly="" value="699 тг">
+        </div>
+        <div class="field">
+          <label>Скидка: </label>
+          <input type="text" readonly="" value="10%">
+        </div>
+        <div class="field">
+          <label>Общая сумма: </label>
+          <input type="text" readonly="" value="1350 тг">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="actions">
+    <div class="ui approve primary button">
+      <i class="edit icon"></i>
+      Редактировать
+    </div>
+    <div class="ui deny button">
+      Закрыть
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer_js %}
+    {{ block.super }}
 
     <!-- footer javascripts -->
     <script src="/js/semantic.min.js"></script>
@@ -673,11 +666,14 @@
         });
 
         $('#modal_open_btn').click(function () {
-          console.log("open");
-          $('#sale_modal').modal("show");
+          openModal();
 
         });
       });
+
+      var openModal = function () {
+        console.log("open");
+        $('#sale_modal').modal("show");
+      };
     </script>
-  </body>
-</html>
+{% endblock %}

@@ -1,275 +1,206 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Продажи</title>
-    <link href="/css/semantic.min.css" rel="stylesheet">
-    <link href="/css/admin.css" rel="stylesheet">
-    <link href="/css/styles.css" rel="stylesheet">
-    <script src="/js/jquery-1.11.3.min.js"></script>
-  </head>
-  <body>
-    <div class="page">
-      <header>
-        <div class="ui container">
-          <div id="logo">
-            <h1 class="ui blue header">
-              BRK Ummastore
-            </h1>
+{% extends "public/templates/__base.html" %}
+
+{% block content %}
+<!-- путь -->
+<div class="ui basic segment">
+  <div class="ui breadcrumb">
+    <a class="section">Все операции</a>
+    <i class="right chevron icon divider"></i>
+    <div class="section">Продажи и возвраты</div>
+  </div>
+</div>
+
+<!-- меню -->
+<div class="ui compact small menu">
+  <a class="item active">
+    Продажи
+  </a>
+  <a class="item">
+    Возвраты
+  </a>
+  <a class="item">
+    Отчеты
+  </a>
+</div>
+
+
+<!-- основная панель -->
+<div class="ui segment">
+  <div class="ui grid">
+    <div class="row">
+      <div class="six wide column">
+        <!-- form -->
+        <form class="ui small form">
+          <h4 class="ui dividing header">Новая продажа</h4>
+          <div class="two fields">
+            <div class="field">
+              <label>Магазин</label>
+              <input type="text" name="" placeholder="Выбрать">
+            </div>
+            <div class="field">
+              <label>Счет</label>
+              <input type="text" name="" placeholder="Выбрать">
+            </div>
           </div>
-          <div class="user-panel">
-            <div class="ui inline labeled icon top right pointing dropdown">
-              <img class="ui avatar user-ava image" src="/images/user_avatars/user1.jpg"> Администратор
+          <div class="field">
+            <label>Клиент</label>
+            <div class="ui fluid search selection dropdown">
+              <input type="hidden" name="client-id">
               <i class="dropdown icon"></i>
+              <div class="default text">Выберите клиента</div>
               <div class="menu">
-                <a class="item" href=""><i class="setting icon"></i>Настройки профиля</a>
-                <a class="item" href=""><i class="sign out icon"></i>Выйти</a>
+                <div class="item" data-value="1">
+                  Канатулы Канат
+                </div>
+                <div class="item" data-value="2">
+                  Иванов Иван
+                </div>
+                <div class="item" data-value="3">
+                  Еще кто-то
+                </div>
+                <div class="item" data-value="4">
+                  Четвертый клиент
+                </div>
               </div>
             </div>
           </div>
-          <div id="main-search-input">
-            <div class="ui icon input">
-              <input type="text" placeholder="Поиск...">
-              <i class="search link icon"></i>
+          <div class="inline field">
+            <div class="ui checkbox">
+              <input type="checkbox" tabindex="0" class="hidden">
+              <label>отсроченная продажа</label>
             </div>
           </div>
-        </div>
-      </header>
-      <div class="ui blue inverted menu top-menu">
-        <div class="ui container">
-          <div class="left menu">
-            <a class="item" href="#"><i class="home icon"></i>Главная</a>
-            <a class="active item" href="/sales"><i class="shop icon"></i>Продажи</a>
-            <a class="item" href="#"><i class="archive icon"></i>Товары</a>
-            <a class="item" href="#"><i class="money icon"></i>Деньги</a>
-            <a class="item" href="#"><i class="settings icon"></i>Настройки</a>
+          <div class="field">
+            <label>Комментарий</label>
+            <textarea rows="2"></textarea>
           </div>
-        </div>
+
+
+          <table class="ui very basic small compact table">
+            <thead>
+              <tr>
+                <th class="twelve wide">Товар</th>
+                <th class="three wide">Кол-во</th>
+                <th class="one wide"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" name="" placeholder="Выбрать"></td>
+                <td><input type="number" name="" placeholder="1"></td>
+                <td><i class="link large grey remove icon"></i></td>
+              </tr>
+              <tr>
+                <td><input type="text" name="" placeholder="Выбрать"></td>
+                <td><input type="number" name="" placeholder="1"></td>
+                <td><i class="link large grey remove icon"></i></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  <div class="ui tiny icon basic button">
+                    <i class="add icon"></i>
+                    добавить товар
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <div class="ui divider"></div>
+
+          <div class="ui labeled primary icon button">
+            <i class="shop icon"></i>
+            Продать
+          </div>
+
+        </form>
       </div>
-      <div class="ui container">
-        <!-- путь -->
-        <div class="ui basic segment">
-          <div class="ui breadcrumb">
-            <a class="section">Все операции</a>
-            <i class="right chevron icon divider"></i>
-            <div class="section">Продажи и возвраты</div>
-          </div>
-        </div>
-
-        <!-- меню -->
-        <div class="ui compact small menu">
-          <a class="item active">
-            Продажи
-          </a>
-          <a class="item">
-            Возвраты
-          </a>
-          <a class="item">
-            Отчеты
-          </a>
-        </div>
-
-
-        <!-- основная панель -->
-        <div class="ui segment">
-          <div class="ui grid">
-            <div class="row">
-              <div class="six wide column">
-                <!-- form -->
-                <form class="ui small form">
-                  <h4 class="ui dividing header">Новая продажа</h4>
-                  <div class="two fields">
-                    <div class="field">
-                      <label>Магазин</label>
-                      <input type="text" name="" placeholder="Выбрать">
-                    </div>
-                    <div class="field">
-                      <label>Счет</label>
-                      <input type="text" name="" placeholder="Выбрать">
-                    </div>
-                  </div>
-                  <div class="field">
-                    <label>Клиент</label>
-                    <div class="ui fluid search selection dropdown">
-                      <input type="hidden" name="client-id">
-                      <i class="dropdown icon"></i>
-                      <div class="default text">Выберите клиента</div>
-                      <div class="menu">
-                        <div class="item" data-value="1">
-                          Канатулы Канат
-                        </div>
-                        <div class="item" data-value="2">
-                          Иванов Иван
-                        </div>
-                        <div class="item" data-value="3">
-                          Еще кто-то
-                        </div>
-                        <div class="item" data-value="4">
-                          Четвертый клиент
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="inline field">
-                    <div class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
-                      <label>отсроченная продажа</label>
-                    </div>
-                  </div>
-                  <div class="field">
-                    <label>Комментарий</label>
-                    <textarea rows="2"></textarea>
-                  </div>
-
-
-                  <table class="ui very basic small compact table">
-                    <thead>
-                      <tr>
-                        <th class="twelve wide">Товар</th>
-                        <th class="three wide">Кол-во</th>
-                        <th class="one wide"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><input type="text" name="" placeholder="Выбрать"></td>
-                        <td><input type="number" name="" placeholder="1"></td>
-                        <td><i class="link large grey remove icon"></i></td>
-                      </tr>
-                      <tr>
-                        <td><input type="text" name="" placeholder="Выбрать"></td>
-                        <td><input type="number" name="" placeholder="1"></td>
-                        <td><i class="link large grey remove icon"></i></td>
-                      </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td colspan="3">
-                          <div class="ui tiny icon basic button">
-                            <i class="add icon"></i>
-                            добавить товар
-                          </div>
-                        </td>
-                      </tr>
-                    </tfoot>
-                  </table>
-
-                  <div class="ui divider"></div>
-
-                  <div class="ui labeled primary icon button">
-                    <i class="shop icon"></i>
-                    Продать
-                  </div>
-
-                </form>
-              </div>
-              <div class="ten wide column">
-                <h4 class="ui dividing header">Последние продажи</h4>
-                <table class="ui compact striped celled table">
-                  <thead>
-                    <tr>
-                      <th>Дата и время</th>
-                      <th>Продавец</th>
-                      <th>Товар</th>
-                      <th>Количество</th>
-                      <th>Клиент</th>
-                      <th>Сумма</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Сегодня, 16:43</td>
-                      <td><a>Искакова Айжан</a></td>
-                      <td><a>Правила Триллионера</a></td>
-                      <td>1</td>
-                      <td><a>Кайнарбек Нурланулы</a></td>
-                      <td>2000</td>
-                    </tr>
-                    <tr>
-                      <td>Сегодня, 16:42</td>
-                      <td><a>Искакова Айжан</a></td>
-                      <td><a>Навыки триллионера</a></td>
-                      <td>1</td>
-                      <td><a>Кайнарбек Нурланулы</a></td>
-                      <td>1500</td>
-                    </tr>
-                    <tr>
-                      <td>24 нояб. 2016, 11:11</td>
-                      <td><a>Искакова Айжан</a></td>
-                      <td><a>Богатей с умом</a></td>
-                      <td>2</td>
-                      <td><a>Иванов Иван</a></td>
-                      <td>5000</td>
-                    </tr>
-                    <tr>
-                      <td>24 нояб. 2016, 11:11</td>
-                      <td><a>Искакова Айжан</a></td>
-                      <td><a>Богатей с умом</a></td>
-                      <td>2</td>
-                      <td><a>Иванов Иван</a></td>
-                      <td>5000</td>
-                    </tr>
-                    <tr>
-                      <td>24 нояб. 2016, 11:11</td>
-                      <td><a>Искакова Айжан</a></td>
-                      <td><a>Богатей с умом</a></td>
-                      <td>2</td>
-                      <td><a>Иванов Иван</a></td>
-                      <td>5000</td>
-                    </tr>
-                    <tr>
-                      <td>23 нояб. 2016, 11:11</td>
-                      <td><a>Искакова Айжан</a></td>
-                      <td><a>Богатей с умом</a></td>
-                      <td>2</td>
-                      <td><a>Иванов Иван</a></td>
-                      <td>5000</td>
-                    </tr>
-                    <tr>
-                      <td>22 нояб. 2016, 11:11</td>
-                      <td><a>Искакова Айжан</a></td>
-                      <td><a>Богатей с умом</a></td>
-                      <td>2</td>
-                      <td><a>Иванов Иван</a></td>
-                      <td>5000</td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th colspan="6">
-                        <a>Посмотреть все</a>
-                      </th>
-                    </tr></tfoot>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div class="ten wide column">
+        <h4 class="ui dividing header">Последние продажи</h4>
+        <table class="ui compact striped celled table">
+          <thead>
+            <tr>
+              <th>Дата и время</th>
+              <th>Продавец</th>
+              <th>Товар</th>
+              <th>Количество</th>
+              <th>Клиент</th>
+              <th>Сумма</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Сегодня, 16:43</td>
+              <td><a>Искакова Айжан</a></td>
+              <td><a>Правила Триллионера</a></td>
+              <td>1</td>
+              <td><a>Кайнарбек Нурланулы</a></td>
+              <td>2000</td>
+            </tr>
+            <tr>
+              <td>Сегодня, 16:42</td>
+              <td><a>Искакова Айжан</a></td>
+              <td><a>Навыки триллионера</a></td>
+              <td>1</td>
+              <td><a>Кайнарбек Нурланулы</a></td>
+              <td>1500</td>
+            </tr>
+            <tr>
+              <td>24 нояб. 2016, 11:11</td>
+              <td><a>Искакова Айжан</a></td>
+              <td><a>Богатей с умом</a></td>
+              <td>2</td>
+              <td><a>Иванов Иван</a></td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <td>24 нояб. 2016, 11:11</td>
+              <td><a>Искакова Айжан</a></td>
+              <td><a>Богатей с умом</a></td>
+              <td>2</td>
+              <td><a>Иванов Иван</a></td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <td>24 нояб. 2016, 11:11</td>
+              <td><a>Искакова Айжан</a></td>
+              <td><a>Богатей с умом</a></td>
+              <td>2</td>
+              <td><a>Иванов Иван</a></td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <td>23 нояб. 2016, 11:11</td>
+              <td><a>Искакова Айжан</a></td>
+              <td><a>Богатей с умом</a></td>
+              <td>2</td>
+              <td><a>Иванов Иван</a></td>
+              <td>5000</td>
+            </tr>
+            <tr>
+              <td>22 нояб. 2016, 11:11</td>
+              <td><a>Искакова Айжан</a></td>
+              <td><a>Богатей с умом</a></td>
+              <td>2</td>
+              <td><a>Иванов Иван</a></td>
+              <td>5000</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="6">
+                <a href="/monitoring/sales">Посмотреть все</a>
+              </th>
+            </tr></tfoot>
+        </table>
       </div>
     </div>
-    <footer>
-      <div id="copyrights">
-        <div class="inset">
-          <div class="bigcontainer">
-            <div class="fl">
-              <div class="logo"></div>
-              <p>© 2016 BRK<br></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- footer javascripts -->
-    <script src="/js/semantic.min.js"></script>
-    <script>
-      $(function () {
-        console.log("start page");
-        $('.ui.dropdown').dropdown();
-        $('.ui.search.dropdown').dropdown({
-          fullTextSearch: "exact"
-        });
-      });
-    </script>
-  </body>
-</html>
+  </div>
+</div>
+{% endblock %}
+
+{% block footer_js %}
+    {{ block.super }}
+{% endblock %}

@@ -1,577 +1,507 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Все товары</title>
-    <link href="/css/semantic.min.css" rel="stylesheet">
-    <link href="/css/admin.css" rel="stylesheet">
-    <link href="/css/styles.css" rel="stylesheet">
-    <script src="/js/jquery-1.11.3.min.js"></script>
-  </head>
-  <body>
-    <div class="page">
-      <header>
-        <div class="ui container">
-          <div id="logo">
-            <h1 class="ui blue header">
-              BRK Ummastore
-            </h1>
-          </div>
-          <div class="user-panel">
-            <div class="ui inline labeled icon top right pointing dropdown">
-              <img class="ui avatar user-ava image" src="/images/user_avatars/user1.jpg"> Администратор
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                <a class="item" href=""><i class="setting icon"></i>Настройки профиля</a>
-                <a class="item" href=""><i class="sign out icon"></i>Выйти</a>
-              </div>
-            </div>
-          </div>
-          <div id="main-search-input">
-            <div class="ui icon input">
-              <input type="text" placeholder="Поиск...">
-              <i class="search link icon"></i>
-            </div>
-          </div>
+{% extends "public/templates/__base.html" %}
+
+{% block content %}
+<!-- путь -->
+<div class="ui basic segment">
+  <div class="ui breadcrumb">
+    <a class="section">Справочники</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">Товары</div>
+  </div>
+</div>
+
+<!-- фильтры -->
+<div class="ui top attached clearing segment header-segment">
+  <div class="ui small left floated header">Фильтры</div>
+  <div class="ui mini right floated icon button">
+    <i class="chevron up icon"></i>
+  </div>
+</div>
+<div class="ui bottom attached segment">
+  <form class="ui form">
+    <div class="inline field">
+      <label>Поиск по строке:</label>
+      <input type="text">
+    </div>
+    <div class="inline field">
+      <label>Поиск по тегам:</label>
+      <div class="ui multiple search selection dropdown middle-aligned">
+        <input name="tags" type="hidden">
+        <i class="dropdown icon"></i>
+        <div class="default text">Тэги</div>
+        <div class="menu">
+          <div class="item" data-value="angular">Трейси</div>
+          <div class="item" data-value="css">Бестселлер</div>
+          <div class="item" data-value="design">Бизнес</div>
+          <div class="item" data-value="ember">Школа</div>
+          <div class="item" data-value="html">Шамиль</div>
+          <div class="item" data-value="ia">Ислам</div>
+          <div class="item" data-value="javascript">Менеджмент</div>
+          <div class="item" data-value="mech">Для женщин</div>
+          <div class="item" data-value="meteor">Для детей</div>
+          <div class="item" data-value="node">Энциклопедия</div>
+          <div class="item" data-value="plumbing">Эксмо</div>
+          <div class="item" data-value="python">МИФ книга</div>
+          <div class="item" data-value="rails">Супер-цена</div>
         </div>
-      </header>
-      <div class="ui blue inverted menu top-menu">
-        <div class="ui container">
-          <div class="left menu">
-            <a class="item" href="#"><i class="home icon"></i>Главная</a>
-            <a class="active item" href="/sales"><i class="shop icon"></i>Продажи</a>
-            <a class="item" href="#"><i class="archive icon"></i>Товары</a>
-            <a class="item" href="#"><i class="money icon"></i>Деньги</a>
-            <a class="item" href="#"><i class="settings icon"></i>Настройки</a>
+      </div>
+    </div>
+    <div class="inline field">
+      <label>Категории:</label>
+      <div class="ui multiple dropdown">
+        <input type="hidden" name="categories">
+        <i class="filter icon"></i>
+        <span class="text">Все </span>
+        <div class="menu">
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="Поиск по названию...">
+          </div>
+          <div class="scrolling menu">
+            <div class="item" data-value="1">
+              Религиозная литература
+            </div>
+            <div class="item" data-value="2">
+              Деловая литература
+            </div>
+            <div class="item" data-value="3">
+              Детская литература
+            </div>
+            <div class="item" data-value="4">
+              Прочее
+            </div>
           </div>
         </div>
       </div>
-      <div class="ui container">
-        <!-- путь -->
-        <div class="ui basic segment">
-          <div class="ui breadcrumb">
-            <a class="section">Справочники</a>
-            <i class="right chevron icon divider"></i>
-            <div class="active section">Товары</div>
+    </div>
+    <div class="inline field">
+      <label>Учитывать склады:</label>
+      <div class="ui multiple dropdown">
+        <input type="hidden" name="filters">
+        <i class="filter icon"></i>
+        <span class="text">Все склады</span>
+        <div class="menu">
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="Поиск по названию...">
+          </div>
+          <div class="scrolling menu">
+            <div class="item" data-value="1">
+              Склад "Магазин Алматы"
+            </div>
+            <div class="item" data-value="2">
+              Склад "Магазин Астана"
+            </div>
+            <div class="item" data-value="3">
+              Контейнер 1
+            </div>
+            <div class="item" data-value="4">
+              Контейнер 2
+            </div>
+            <div class="item" data-value="5">
+              Контейнер 3
+            </div>
           </div>
         </div>
-
-        <!-- фильтры -->
-        <div class="ui top attached clearing segment header-segment">
-          <div class="ui small left floated header">Фильтры</div>
-          <div class="ui mini right floated icon button">
-            <i class="chevron up icon"></i>
-          </div>
-        </div>
-        <div class="ui bottom attached segment">
-          <form class="ui form">
-            <div class="inline field">
-              <label>Поиск по строке:</label>
-              <input type="text">
-            </div>
-            <div class="inline field">
-              <label>Поиск по тегам:</label>
-              <div class="ui multiple search selection dropdown middle-aligned">
-                <input name="tags" type="hidden">
-                <i class="dropdown icon"></i>
-                <div class="default text">Тэги</div>
-                <div class="menu">
-                  <div class="item" data-value="angular">Трейси</div>
-                  <div class="item" data-value="css">Бестселлер</div>
-                  <div class="item" data-value="design">Бизнес</div>
-                  <div class="item" data-value="ember">Школа</div>
-                  <div class="item" data-value="html">Шамиль</div>
-                  <div class="item" data-value="ia">Ислам</div>
-                  <div class="item" data-value="javascript">Менеджмент</div>
-                  <div class="item" data-value="mech">Для женщин</div>
-                  <div class="item" data-value="meteor">Для детей</div>
-                  <div class="item" data-value="node">Энциклопедия</div>
-                  <div class="item" data-value="plumbing">Эксмо</div>
-                  <div class="item" data-value="python">МИФ книга</div>
-                  <div class="item" data-value="rails">Супер-цена</div>
-                </div>
-              </div>
-            </div>
-            <div class="inline field">
-              <label>Категории:</label>
-              <div class="ui multiple dropdown">
-                <input type="hidden" name="categories">
-                <i class="filter icon"></i>
-                <span class="text">Все </span>
-                <div class="menu">
-                  <div class="ui icon search input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="Поиск по названию...">
-                  </div>
-                  <div class="scrolling menu">
-                    <div class="item" data-value="1">
-                      Религиозная литература
-                    </div>
-                    <div class="item" data-value="2">
-                      Деловая литература
-                    </div>
-                    <div class="item" data-value="3">
-                      Детская литература
-                    </div>
-                    <div class="item" data-value="4">
-                      Прочее
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="inline field">
-              <label>Учитывать склады:</label>
-              <div class="ui multiple dropdown">
-                <input type="hidden" name="filters">
-                <i class="filter icon"></i>
-                <span class="text">Все склады</span>
-                <div class="menu">
-                  <div class="ui icon search input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="Поиск по названию...">
-                  </div>
-                  <div class="scrolling menu">
-                    <div class="item" data-value="1">
-                      Склад "Магазин Алматы"
-                    </div>
-                    <div class="item" data-value="2">
-                      Склад "Магазин Астана"
-                    </div>
-                    <div class="item" data-value="3">
-                      Контейнер 1
-                    </div>
-                    <div class="item" data-value="4">
-                      Контейнер 2
-                    </div>
-                    <div class="item" data-value="5">
-                      Контейнер 3
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="ui primary button">
-              <i class="search icon"></i>
-              Поиск
-            </div>
-          </form>
-        </div>
-
-        <!-- результаты таблицы -->
-        <div class="ui segment">
-          <div class="ui dividing header">
-            Результаты поиска -
-            <span class="text-span">найдено: </span>
-            <span class="number-span">300</span>,
-            <span class="text-span">показаны: </span>
-            <span class="number-span">1-20</span>
-          </div>
-          <div class="ui primary small labeled icon button">
-            <i class="add icon"></i>
-            Добавить товар
-          </div>
-          <div class="ui red basic small button">
-            <i class="remove icon"></i>
-            Удалить отмеченные
-          </div>
-          <div class="ui right floated pagination small menu">
-            <a class="icon item">
-              <i class="left chevron icon"></i>
-            </a>
-            <a class="item">1</a>
-            <a class="item">2</a>
-            <a class="item">3</a>
-            <a class="item">4</a>
-            <a class="icon item">
-              <i class="right chevron icon"></i>
-            </a>
-          </div>
-
-          <table class="ui compact celled selectable table">
-            <thead>
-              <tr>
-                <th>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example">
-                  </div>
-                </th>
-                <th>Картинка</th>
-                <th>Наименование</th>
-                <th>Код</th>
-                <th>Категория</th>
-                <th>Цена</th>
-                <th>Себестоимость</th>
-                <th>Тэги</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td><a href="#">12 правил успешного бизнеса и т.д.</a></td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr class="positive">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-<!--                 <td>
-                  <div class="ui icon mini primary button">
-                    <i class="edit icon"></i>
-                  </div>
-                </td> -->
-              </tr>
-              <tr class="positive">
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="ui checkbox">
-                    <input type="checkbox" name="example2">
-                  </div>
-                </td>
-                <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
-                <td>12 правил успешного бизнеса и т.д.</td>
-                <td>934-4324-1232-3</td>
-                <td>Деловая литература</td>
-                <td>2000</td>
-                <td>1299</td>
-                <td>
-                  <div class="ui tiny tag labels">
-                    <div class="ui label">
-                      Трейси
-                    </div>
-                    <div class="ui label">
-                      Бестселлер
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-
       </div>
     </div>
 
-    <footer>
-      <div id="copyrights">
-        <div class="inset">
-          <div class="bigcontainer">
-            <div class="fl">
-              <div class="logo"></div>
-              <p>© 2016 BRK<br></p>
+
+    <div class="ui primary button">
+      <i class="search icon"></i>
+      Поиск
+    </div>
+  </form>
+</div>
+
+<!-- результаты таблицы -->
+<div class="ui segment">
+  <div class="ui dividing header">
+    Результаты поиска -
+    <span class="text-span">найдено: </span>
+    <span class="number-span">300</span>,
+    <span class="text-span">показаны: </span>
+    <span class="number-span">1-20</span>
+  </div>
+  <div class="ui primary small labeled icon button">
+    <i class="add icon"></i>
+    Добавить товар
+  </div>
+  <div class="ui red basic small button">
+    <i class="remove icon"></i>
+    Удалить отмеченные
+  </div>
+  <div class="ui right floated pagination small menu">
+    <a class="icon item">
+      <i class="left chevron icon"></i>
+    </a>
+    <a class="item">1</a>
+    <a class="item">2</a>
+    <a class="item">3</a>
+    <a class="item">4</a>
+    <a class="icon item">
+      <i class="right chevron icon"></i>
+    </a>
+  </div>
+
+  <table class="ui compact celled selectable table">
+    <thead>
+      <tr>
+        <th>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example">
+          </div>
+        </th>
+        <th>Картинка</th>
+        <th>Наименование</th>
+        <th>Код</th>
+        <th>Категория</th>
+        <th>Цена</th>
+        <th>Себестоимость</th>
+        <th>Тэги</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td><a href="#">12 правил успешного бизнеса и т.д.</a></td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
             </div>
           </div>
-        </div>
-      </div>
-    </footer>
-    <!-- footer javascripts -->
-    <script src="/js/semantic.min.js"></script>
-    <script>
-      $(function () {
-        console.log("start page");
-        $('.ui.dropdown').dropdown();
-        $('.ui.checkbox').checkbox();
-        $('.ui.search.dropdown').dropdown({
-          fullTextSearch: "exact"
-        });
-      });
-    </script>
-  </body>
-</html>
+        </td>
+      </tr>
+      <tr class="positive">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+        <!--                 <td>
+<div class="ui icon mini primary button">
+<i class="edit icon"></i>
+</div>
+</td> -->
+      </tr>
+      <tr class="positive">
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="ui checkbox">
+            <input type="checkbox" name="example2">
+          </div>
+        </td>
+        <td><img class="ui mini image" src="/images/goods/good_default.png"></td>
+        <td>12 правил успешного бизнеса и т.д.</td>
+        <td>934-4324-1232-3</td>
+        <td>Деловая литература</td>
+        <td>2000</td>
+        <td>1299</td>
+        <td>
+          <div class="ui tiny tag labels">
+            <div class="ui label">
+              Трейси
+            </div>
+            <div class="ui label">
+              Бестселлер
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
+
+{% block footer_js %}
+  {{ block.super }}
+{% endblock %}
+

@@ -1,6 +1,7 @@
 (ns storeproj.core
   (:require [bidi.bidi :as bidi]
             [yada.yada :as yada]
+            [selmer.parser :as selmer]
             [yada.resources.file-resource :refer [new-file-resource respond-with-file]]
             [schema.core :as s]
             [yada.resources.classpath-resource :refer [new-classpath-resource]]
@@ -16,23 +17,31 @@
 (defonce server (atom nil))
 
 
+
 (defn html-template-resource
-  [res-id html-tmpl-path]
-  (yada/resource {:id res-id
-                  :produces {:media-type "text/html"}
-                  :methods {:get
-                            {:response (fn[ctx]
-                                         (respond-with-file ctx
-                                                            (new java.io.File html-tmpl-path)
-                                                            nil))}}}))
+  [res-id html-tmpl-name html-title]
+  (let [html-path (str "public/templates/" html-tmpl-name)]
+    (yada/resource {:id res-id
+                    :produces {:media-type "text/html"
+                               :charset "UTF-8"}
+                    :methods {:get
+                              {:response (fn[ctx]
+                                           (respond-with-file ctx
+                                                              (selmer/render-file html-path
+                                                                                  {:page-title html-title})
+                                                              nil))}}})))
+;;                                          (respond-with-file ctx
+;;                                                             (new java.io.File html-tmpl-path)
+;;                                                             nil))}}}))
 
 (def bidi-routes
-  ["" [["/" (html-template-resource ::index "resources/public/templates/index.html")]
-       ["/login" (html-template-resource ::login "resources/public/templates/login.html")]
-       ["/sales" (html-template-resource ::sales "resources/public/templates/sales.html")]
-       ["/monitoring/sales" (html-template-resource ::sales-search "resources/public/templates/sales_search.html")]
-       ["/goods/details" (html-template-resource ::goods-details "resources/public/templates/goods_details.html")]
-       ["/goods/all" (html-template-resource ::goods-all "resources/public/templates/goods_search.html")]
+  ["" [["/" (html-template-resource ::index "index.html" "Главная")]
+       ["/login" (html-template-resource ::login "login.html" "Вход в систему")]
+       ["/sales" (html-template-resource ::sales "sales.html" "Продажи")]
+;;        ["/cashflows" (html-template-resource ::sales "resources/public/templates/cashflows.html")]
+       ["/monitoring/sales" (html-template-resource ::sales-search "sales_search.html" "Поиск продаж")]
+       ["/goods/details" (html-template-resource ::goods-details "goods_details.html" "Описание товара")]
+       ["/goods/all" (html-template-resource ::goods-all "goods_search.html" "Все товары")]
        ["" (yada/yada (new-classpath-resource "public"))]
    ]])
 
